@@ -19,7 +19,7 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAddToCart }) => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
-    
+
     for (let i = 1; i <= 5; i++) {
       if (i <= fullStars) {
         // Full star
@@ -58,18 +58,18 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAddToCart }) => {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (!book.inStock || isAddingToCart) return;
-    
+
     setIsAddingToCart(true);
-    
+
     try {
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       if (onAddToCart) {
         onAddToCart(book.id);
       }
-      
+
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 2000);
     } catch (error) {
@@ -95,9 +95,14 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAddToCart }) => {
             {/* Main Info */}
             <div className="flex-1 min-w-0">
               <Link href={`/book/${book.id}`} className="block group cursor-pointer">
-                <h3 className="text-lg font-semibold text-gray-800 truncate group-hover:text-blue-600 transition-colors duration-200">
+                <h3
+                  className="text-lg font-semibold text-gray-800 truncate 
+  group-hover:text-blue-600 group-hover:scale-105 
+  transition-transform transition-colors duration-300"
+                >
                   {book.title}
                 </h3>
+
                 <p className="text-sm text-gray-600 mt-1">by {book.author}</p>
               </Link>
 
@@ -112,8 +117,8 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAddToCart }) => {
               {/* Genres */}
               <div className="flex flex-wrap gap-1 mt-2">
                 {book.genre.slice(0, 3).map((genre) => (
-                  <span 
-                    key={genre} 
+                  <span
+                    key={genre}
                     className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs font-medium text-gray-700"
                   >
                     {genre}
@@ -148,23 +153,27 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAddToCart }) => {
               {/* Action Buttons */}
               <div className="flex flex-col gap-2 min-w-[120px]">
                 <Link href={`/book/${book.id}`} className="cursor-pointer">
-                  <button className="w-full px-3 py-2 text-sm border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                  <button className="w-full px-3 py-2 text-sm border border-gray-300 
+  text-gray-700 rounded-md 
+  hover:bg-blue-100 hover:text-blue-700 
+  transition-colors duration-300 cursor-pointer">
                     View Details
                   </button>
+
+
                 </Link>
-                
+
                 <button
                   onClick={handleAddToCart}
                   disabled={!book.inStock || isAddingToCart}
-                  className={`w-full px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
-                    !book.inStock
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : showSuccess
+                  className={`w-full px-3 py-2 text-sm rounded-md transition-colors duration-200 ${!book.inStock
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : showSuccess
                       ? 'bg-green-600 text-white cursor-pointer'
                       : isAddingToCart
-                      ? 'bg-blue-400 text-white cursor-wait'
-                      : 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer'
-                  }`}
+                        ? 'bg-blue-400 text-white cursor-wait'
+                        : 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer'
+                    }`}
                 >
                   {showSuccess ? (
                     <span className="flex items-center justify-center gap-1">
