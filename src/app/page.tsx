@@ -15,12 +15,16 @@ export default function HomePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Welcome Section */}
-      <section className="text-center bg-blue-100 p-8 rounded-lg mb-12 shadow-md">
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-2">Welcome to the Amana Bookstore!</h1>
-        <p className="text-lg text-gray-600">
+      <section className="text-center bg-gradient-to-r from-blue-200 to-blue-400 p-12 rounded-2xl mb-12 shadow-lg">
+        <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
+          Welcome to the Amana Bookstore!
+        </h1>
+        <p className="text-xl text-gray-700 mb-6">
           Your one-stop shop for the best books. Discover new worlds and adventures.
         </p>
+
       </section>
+
 
       {/* Book Grid */}
       <BookGrid books={books} onAddToCart={handleAddToCart} />
